@@ -57,6 +57,15 @@
         <archunit-junit5.version>0.15.0</archunit-junit5.version>
         <mapstruct.version>1.4.2.Final</mapstruct.version>
         <oauth2-client.version>2.3.1.RELEASE</oauth2-client.version>
+        <!--
+            Keycloak 20+ publishes mtls_endpoint_aliases as a JSON object.
+            Spring Security 5.4.x passes nested Jackson maps to Nimbus; the
+            Nimbus version managed by the old BOM rejects those maps while
+            parsing OIDC discovery metadata. Keep the targeted overrides
+            explicit so the fix remains visible when the BOM is refreshed.
+        -->
+        <oauth2-oidc-sdk.version>9.19</oauth2-oidc-sdk.version>
+        <nimbus-jose-jwt.version>9.14</nimbus-jose-jwt.version>
         <!-- Plugin versions -->
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
@@ -95,6 +104,16 @@
                 <version>${jhipster-dependencies.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>oauth2-oidc-sdk</artifactId>
+                <version>${oauth2-oidc-sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
             </dependency>
             <!-- jhipster-needle-maven-add-dependency-management -->
         </dependencies>
